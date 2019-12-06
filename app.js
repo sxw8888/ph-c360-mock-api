@@ -39,6 +39,6 @@ app.post('/subscription/status/set', async (req, res, next) => {
   // res.status(429).send({message: '/SMS Error 429'});
 });
 
-app.listen(3300, () => {
+app.listen(process.env.PORT || 3300, () => {
   console.log('Server running on port 3300');
 });
