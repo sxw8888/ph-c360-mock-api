@@ -33,8 +33,7 @@ class ProcessRequestBody {
                     .then(csv => {
                         //! Logic to write to database
                         // const parsed = this.parseCSV(csv);    
-                        const _csv = csv + '\n'
-                        fs.appendFileSync('./outputs/alias.csv', _csv, 'utf8');
+                        if(csv != "") fs.appendFileSync('./outputs/alias.csv',  csv + '\n', 'utf8');
                     })
                     .catch(err => {
                         throw new Error(`Error from parseAsync ${err}`)
@@ -50,8 +49,7 @@ class ProcessRequestBody {
                 parseAsync(data, options)
                     .then(csv => {
                         //! Logic to write to database
-                        const _csv = csv + '\n'
-                        fs.appendFileSync('./outputs/sms.csv', _csv, 'utf8');
+                        if(csv != "") fs.appendFileSync('./outputs/sms.csv',  csv + '\n', 'utf8');
                     })
                     .catch(err => {
                         console.error(err)
