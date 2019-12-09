@@ -23,7 +23,7 @@ app.post('/users/track', async (req, res, next) => {
   await snooze(waitTimeMs);
   processRequestBody.profileRequest(req.body)
 
-  res.status(201).send({message: '/USER/TRACK created 201'});
+  res.status(201).send({message: 'success'});
   // res.status(429).send({message: '/USER/TRACK Error 429'});
 });
 
@@ -42,6 +42,21 @@ app.post('/subscription/status/set', async (req, res, next) => {
   res.status(201).send({message: '/SMS created 201'});
   // res.status(429).send({message: '/SMS Error 429'});
 });
+
+app.post('/users/export/ids', async (req, res, next) => {
+  await snooze(waitTimeMs);
+  processRequestBody.smsRequest(req.body)
+  const mockResponse = {
+      "users": [
+          {
+              "user_aliases": []
+          }
+        ]
+  }
+  res.status(201).json(mockResponse);
+  // res.status(429).send({message: '/SMS Error 429'});
+});
+
 
 app.listen(3000, () => {
   console.log('Server running on port 3000');
