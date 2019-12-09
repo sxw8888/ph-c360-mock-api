@@ -1,0 +1,21 @@
+{
+  "api_key": "31342468-a5b5-4981-90d4-056e94f7cd16",
+  "user_aliases": 
+  [
+      {
+        "external_id": "2683989037",
+        "alias_label": "qo_cust_guid",
+        "alias_name": "10050301634574754271351919"
+      },
+      {
+        "external_id": "2683989037",
+        "alias_label": "email",
+        "alias_name": "kschnite@comcast.net"
+      }, 
+      {
+        "external_id": "2683989037",
+        "alias_label": "punch_id",
+        "alias_name": "5oxm7nxCxkxDkszYU_M5"
+      }
+  ]
+}
