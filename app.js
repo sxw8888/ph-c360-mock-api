@@ -23,12 +23,12 @@ if (process.env.ENVIRONMENT === 'dev') app.use(morgan('dev'));
 
 app.use(express.json());
 
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/users/track', async (req, res, next) => {
   await snooze(waitTimeMs);
-  processRequestBody.profileRequest(req.body)
+  processRequestBody.profileRequest(req.body, statuses.track)
 
   if (statuses.track === 201 ) res.status(statuses.track).send({message: 'success'});
   else res.status(statuses.track).send({message: `/USER/TRACK Error ${statuses.track}`});
@@ -36,7 +36,7 @@ app.post('/users/track', async (req, res, next) => {
 
 app.post('/users/alias/new', async (req, res, next) => {
   await snooze(waitTimeMs);
-  processRequestBody.aliasRequest(req.body)
+  processRequestBody.aliasRequest(req.body, statuses.aliases)
 
   if (statuses.aliases === 201 ) res.status(statuses.aliases).send({message: `+++++++++++++++ /ALIASES created ${statuses.aliases}`});
   else res.status(statuses.aliases).send({message: `+++++++++++++++ /ALIASES Error ${statuses.aliases}`});
@@ -44,7 +44,7 @@ app.post('/users/alias/new', async (req, res, next) => {
 
 app.post('/subscription/status/set', async (req, res, next) => {
   await snooze(waitTimeMs);
-  processRequestBody.smsRequest(req.body)
+  processRequestBody.smsRequest(req.body, statuses.subscription)
 
   if (statuses.subscription === 201 ) res.status(statuses.subscription).send({message: `+++++++++++++++ /SMS created ${statuses.subscription}`});
   else res.status(statuses.subscription).send({message: `+++++++++++++++ /SMS Error ${statuses.subscription}`});
