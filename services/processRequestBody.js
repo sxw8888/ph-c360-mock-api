@@ -8,7 +8,7 @@ class ProcessRequestBody {
 
     profileRequest(req, status) {
         logger.info(`(ProcessRequestBody/profileRequest) Receiving: ${JSON.stringify(req)}`);
-        this.generateCSV(req, 'track', status);
+        if (status === 201) this.generateCSV(req, 'track', status);
     }
 
     aliasRequest(req, status) {

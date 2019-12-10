@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const ProcessRequestBody = require('./services/processRequestBody')
+const processRequestBody = new ProcessRequestBody();
 
 const app = express();
 
@@ -16,8 +17,6 @@ let statuses = {
   aliases: 201,
   subscription: 201
 }
-
-const processRequestBody = new ProcessRequestBody();
 
 if (process.env.ENVIRONMENT === 'dev') app.use(morgan('dev'));
 
