@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node mock-api.js",
+    "maxrun": "node --max-old-space-size=7000 --require dotenv/config  mock-api.js",
+    "dev": "nodemon mock-api.js"
   },
   "repository": {
     "type": "git",

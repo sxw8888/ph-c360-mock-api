@@ -8,7 +8,7 @@ const ProcessRequestBody = require('./services/processRequestBody')
 const app = express();
 
 const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const waitTimeMs = process.env.WAIT_TIME;
+let waitTimeMs = process.env.WAIT_TIME;
 
 let statuses = {
   track: 201,
@@ -65,15 +65,16 @@ app.post('/users/export/ids', async (req, res, next) => {
 });
 
 app.post('/admin', async (req, res, next) => {
-  console.log(`Setting endpoints status From ${JSON.stringify(statuses)} to ${JSON.stringify(req.body)}`);
+  console.log(`Setting endpoints status From ${JSON.stringify(statuses)} to ${JSON.stringify(req.body)}, # WaitTimeMs: ${waitTimeMs} ms`);
   if (req.body.track) statuses.track = parseInt(req.body.track, 10);
   if (req.body.exportIds) statuses.exportIds = parseInt(req.body.exportIds, 10);
   if (req.body.aliases) statuses.aliases = parseInt(req.body.aliases, 10);
   if (req.body.subscription) statuses.subscription = parseInt(req.body.subscription, 10);
-  res.send(`Status changed to ${JSON.stringify(statuses)}`);
+  if (req.body.waitTimeMs !== undefined) waitTimeMs = parseInt(req.body.waitTimeMs, 10);
+  res.send(`Status changed to ${JSON.stringify(statuses)} # WaitTimeMs: ${waitTimeMs} ms`);
 });
 
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running on port ${process.env.PORT || 3000}`);
 });

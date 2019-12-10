@@ -23,12 +23,12 @@ class ProcessRequestBody {
 
     generateCSV(data, name, status) {
         if(name === 'track') {
-            //TODO Add log for TRACK (JSON format)
-            const jsonDoc = JSON.stringify(data.attributes).replace(/[\[\]"]+/g,"");
-            fs.appendFileSync(`./outputs/track.json`,  jsonDoc + ',', 'utf8');
-            
 
+            const jsonDoc = JSON.stringify(data.attributes).replace(/[\[\]"]+/g,"");
+            fs.appendFileSync(`./outputs/track.json`,  jsonDoc + '\n', 'utf8');    
+               
         } else if (name === 'alias') {
+
             const fields = ['user_aliases.external_id', 'user_aliases.alias_label', 'user_aliases.alias_name'];
             const options = { fields, header: false, unwind: ['user_aliases'], unwindBlank: true, quote: '' };
             
@@ -45,7 +45,9 @@ class ProcessRequestBody {
             } catch (err) {
                 logger.error(err);
             }
-        } else if (name === 'sms') {            
+
+        } else if (name === 'sms') {  
+
             const fields = ['external_id', 'subscription_state'];
             const options = { fields, header: false, quote: ''};
             
@@ -62,6 +64,7 @@ class ProcessRequestBody {
             } catch (err) {
                 logger.error(err);
             }
+            
         } else {
 
         }
