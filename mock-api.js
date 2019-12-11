@@ -1,5 +1,6 @@
 require('dotenv').config();
 const logger = require('./configs/logger');
+const uuidv1 = require('uuid/v1');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -71,6 +72,14 @@ app.post('/admin', async (req, res, next) => {
   if (req.body.subscription) statuses.subscription = parseInt(req.body.subscription, 10);
   if (req.body.waitTimeMs !== undefined) waitTimeMs = parseInt(req.body.waitTimeMs, 10);
   res.send(`Status changed to ${JSON.stringify(statuses)} # WaitTimeMs: ${waitTimeMs} ms`);
+});
+
+app.post('/', async (req, res, next) => {
+
+  console.log(`Got request ${JSON.stringify(req.body)}`);
+  res.send(uuidv1());
+  // res.send(`dsaa-131-faf-ewafa-afwr`);
+  
 });
 
 
