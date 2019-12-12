@@ -1,6 +1,6 @@
 require('dotenv').config();
 const logger = require('./configs/logger');
-const uuidv1 = require('uuid/v1');
+const uuidv1 = require('uuid/v4');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -76,9 +76,8 @@ app.post('/admin', async (req, res, next) => {
 
 app.post('/', async (req, res, next) => {
 
-  console.log(`Got request ${JSON.stringify(req.body)}`);
+  // Generate unique CRM_ID
   res.send(uuidv1());
-  // res.send(`dsaa-131-faf-ewafa-afwr`);
   
 });
 

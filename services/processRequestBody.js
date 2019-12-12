@@ -23,9 +23,11 @@ class ProcessRequestBody {
 
     generateCSV(data, name, status) {
         if(name === 'track') {
+            const jsonDoc = JSON.stringify(data.attributes);
+            const _jsonDoc = jsonDoc.toString();
+            const __jsonDoc = _jsonDoc.replace(/[\[\]']+/g, '').replace(/},/g, '}\n');
 
-            const jsonDoc = JSON.stringify(data.attributes).replace(/[\[\]"]+/g,"");
-            fs.appendFileSync(`./outputs/track.json`,  jsonDoc + '\n', 'utf8');    
+            if (status === 201 ) fs.appendFileSync(`./outputs/track.json`,  __jsonDoc + '\n', 'utf8');    
                
         } else if (name === 'alias') {
 
